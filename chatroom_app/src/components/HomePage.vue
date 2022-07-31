@@ -1,19 +1,21 @@
 <template>
   <div class="text-center">
     <img class="mb-4" src="@/assets/logo.svg" alt="" width="72" height="72">
+  </div>
+  <div class="text-center" id=content>
     <form id="loginForm" class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
       <input v-model="LoginForm.username" name="username" class="form-control" placeholder="Username">
       <input v-model="LoginForm.password" name="password" type="password" class="form-control" placeholder="Password">
       <div class="checkbox mb-3">
       </div>
       <input type="button" @click="btnLogin_Click(this)" class="btn btn-lg btn-primary btn-block" value="Submit" />
     </form>
-
     <form id="registerForm" class="form-signin">
       <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
       <input name="username" class="form-control" v-model="RegisterForm.username" placeholder="Username">
-      <input type="password" name="password" v-model="RegisterForm.password" class="form-control" placeholder="Password">
+      <input type="password" name="password" v-model="RegisterForm.password" class="form-control"
+        placeholder="Password">
       <input type="email" name="email" v-model="RegisterForm.email" class="form-control" placeholder="Email">
       <div class="checkbox mb-3">
         <label>
@@ -27,12 +29,24 @@
       </div>
       <input type="button" @click="btnRegister_Click(this)" class="btn btn-lg btn-primary btn-block" value="Submit" />
     </form>
+  </div>
+  <div class="text-center">
     <p class="mt-5 mb-3 text-muted">© Kernel.Yang</p>
-
   </div>
 </template>
 
 <style>
+#loginForm{
+  margin-bottom: 12rem;
+}
+#registerForm{
+  margin-bottom: 9rem;
+}
+#content {
+  height: 450px;
+  overflow: auto;
+}
+
 label {
   margin-right: 1rem;
 }
