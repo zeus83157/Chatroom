@@ -6,6 +6,7 @@ using Chatroom.Repositories.Models.UnitOfWorks;
 using Chatroom.Utilities.Services;
 using Chatroom.WebAPI.Helpers;
 using Chatroom.WebAPI.Models;
+using Chatroom.WebAPI.Models.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -70,6 +71,9 @@ builder.Services.AddScoped<IUnitOfWork, EFCoreUnitOfWork>();
 builder.Services.AddScoped(typeof(AuthService));
 builder.Services.AddScoped(typeof(AccountService));
 
+builder.Services.AddSignalR();
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -84,5 +88,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
