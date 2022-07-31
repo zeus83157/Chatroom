@@ -27,7 +27,7 @@ namespace Chatroom.WebAPI.Controllers
                 var token = _jwtHelper.GenerateToken(model.UserName.ToString());
                 return Ok(new { token });
             }
-            return BadRequest();
+            return BadRequest("Login Fail");
         }
     }
 }
