@@ -1,6 +1,8 @@
 using Chatroom.Repositories.Models.EFCoreRepositories;
 using Chatroom.Repositories.Models.EFCoreRepositories.ORM;
 using Chatroom.Repositories.Models.Interfaces.Repository;
+using Chatroom.Repositories.Models.Interfaces.UnitOfWork;
+using Chatroom.Repositories.Models.UnitOfWorks;
 using Chatroom.Utilities.Services;
 using Chatroom.WebAPI.Helpers;
 using Chatroom.WebAPI.Models;
@@ -62,7 +64,11 @@ builder.Services.AddScoped(typeof(ClaimsPrincipal));
 
 builder.Services.AddScoped<JwtHelper>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUsersWithRoleRepository, UsersWithRoleRepository>();
+builder.Services.AddScoped<IUnitOfWork, EFCoreUnitOfWork>();
 builder.Services.AddScoped(typeof(AuthService));
+builder.Services.AddScoped(typeof(AccountService));
 
 var app = builder.Build();
 
