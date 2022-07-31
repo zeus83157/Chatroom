@@ -1,4 +1,7 @@
+using Chatroom.WebAPI.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
 // Add services to the container.
 
