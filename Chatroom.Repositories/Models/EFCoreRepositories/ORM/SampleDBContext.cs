@@ -41,7 +41,9 @@ namespace Chatroom.Repositories.Models.EFCoreRepositories.ORM
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.Password).IsRequired();
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.UserName)
                     .IsRequired()
@@ -56,13 +58,13 @@ namespace Chatroom.Repositories.Models.EFCoreRepositories.ORM
                     .WithMany(p => p.UsersWithRole)
                     .HasForeignKey(d => d.RoleID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UsersWithRole_Role");
+                    .HasConstraintName("FK_Role_UsersWithRole1");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UsersWithRole)
                     .HasForeignKey(d => d.UserID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UsersWithRole_User");
+                    .HasConstraintName("FK_User_UsersWithRole");
             });
 
             OnModelCreatingPartial(modelBuilder);
