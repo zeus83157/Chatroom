@@ -11,7 +11,7 @@ namespace Chatroom.WebAPI.Models.ViewModels
         [Required]
         [MinLength(8)]
         [MaxLength(20)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [EmailAddress]
         [Required]

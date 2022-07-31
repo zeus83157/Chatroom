@@ -23,7 +23,7 @@ namespace Chatroom.WebAPI.Controllers
                 Email = accountViewModel.Email,
                 Gender = accountViewModel.Gender,
                 Password = accountViewModel.Password,
-                UserName = accountViewModel.UserName,
+                UserName = accountViewModel.Username,
                 StarSignID = accountViewModel.StarSignID,
             };
             if (_accountService.CreateUser(accountData))
