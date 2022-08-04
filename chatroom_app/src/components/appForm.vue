@@ -12,6 +12,7 @@
 import { defineComponent } from "vue";
 import formTextbox from "@/components/formTextbox.vue";
 export default defineComponent({
+    props: ["dataset"],
     components: {
         formTextbox
     },
