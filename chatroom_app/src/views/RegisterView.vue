@@ -1,14 +1,59 @@
 <template>
-    <RegisterForm />
+  <appForm v-bind:dataset="dataset" />
 </template>
 <script>
 // @ is an alias to /src
-import RegisterForm from '@/components/RegisterForm.vue'
+import appForm from '@/components/appForm.vue'
 
 export default {
   name: 'RegisterView',
   components: {
-    RegisterForm
+    appForm
+  },
+  data() {
+    return {
+      dataset: {
+        textfields: [{
+          name: "username",
+          value: "",
+          attr: {
+            type: "text",
+            placeholder: "please input your username"
+          }
+        },
+        {
+          name: "password",
+          value: "",
+          attr: {
+            type: "password",
+            placeholder: "please input your password",
+            autocomplete: "off"
+          }
+        },
+        {
+          name: "email",
+          value: "",
+          attr: {
+            type: "email",
+            placeholder: "please input your email"
+          }
+        }],
+        radiofields: [{
+          name: "gender",
+          options: [{
+            htmltext: "Male",
+            value: true
+          }, {
+            htmltext: "Female",
+            value: false
+          }],
+          attr: {
+            checked: "pacheckedssword",
+          }
+        }
+        ]
+      }
+    }
   }
 }
 </script>

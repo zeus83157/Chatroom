@@ -1,5 +1,5 @@
 <template>
-    <input name="password" type="password" class="form-control" placeholder="Password">
+    <input class="form-control">
 </template>
 <script>
 import { defineComponent } from "vue";

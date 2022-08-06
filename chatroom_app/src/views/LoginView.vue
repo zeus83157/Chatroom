@@ -1,31 +1,36 @@
 <template>
-  <LoginForm />
-  <appForm v-bind:dataset="dataset" />
+  <appForm v-bind:dataset="dataset" url="api/Auth/login" />
 </template>
 <script>
 // @ is an alias to /src
-import LoginForm from '@/components/LoginForm.vue'
 import appForm from '@/components/appForm.vue'
 
 export default {
   name: 'LoginView',
   components: {
-    LoginForm,
     appForm
   },
   data() {
     return {
       dataset: {
-        names: ["username", "password"],
-        recard: ["test", "test"],
-        attrs: [{
-          placeholder: "username",
-          type: "text"
-        }, {
-          placeholder: "password",
-          type: "password"
+        textfields: [{
+          name: "username",
+          value: "",
+          attr: {
+            type: "text",
+            placeholder: "please input your username"
+          }
+        },
+        {
+          name: "password",
+          value: "",
+          attr: {
+            type: "password",
+            placeholder: "please input your password"
+          }
         }]
-      }
+      },
+
     }
   }
 }
