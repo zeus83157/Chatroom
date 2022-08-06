@@ -34,7 +34,7 @@ export default defineComponent({
     },
     methods: {
         btnLogin_Click: (component) => {
-            let api_url = process.env.VUE_APP_ENDPOINT + 'api/Auth/login';
+            let api_url = process.env.VUE_APP_WEBAPI_ENDPOINT + 'api/Auth/login';
             let data = JSON.stringify(component.LoginForm);
             axios.post(api_url, data, {
                 headers: {

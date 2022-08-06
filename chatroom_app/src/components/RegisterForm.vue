@@ -42,7 +42,7 @@ export default defineComponent({
     },
     methods: {
         btnRegister_Click: (component) => {
-            let api_url = process.env.VUE_APP_ENDPOINT + 'api/Account/register';
+            let api_url = process.env.VUE_APP_WEBAPI_ENDPOINT + 'api/Account/register';
             let gender = component.RegisterForm.gender == "male";
             let data = component.RegisterForm;
             data.gender = gender;
