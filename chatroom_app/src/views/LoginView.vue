@@ -13,10 +13,7 @@ export default {
     LoginForm,
     appForm
   },
-  create: function () {
-
-  },
-  data: function () {
+  data() {
     return {
       dataset: {
         names: ["username", "password"],

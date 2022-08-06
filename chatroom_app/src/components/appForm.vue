@@ -17,7 +17,7 @@ export default defineComponent({
         formTextbox
     },
     methods: {
-        btnLogin_Click: function () {
+        btnLogin_Click() {
         }
     }
 })
