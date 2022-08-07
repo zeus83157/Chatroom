@@ -1,0 +1,39 @@
+<template>
+    <div class="col-sm-5 col-sm-offset-6 frame" style="margin:auto;">
+        <ul>
+            <chatLeftRecord />
+            <chatRightRecord />
+        </ul>
+        <div>
+            <div class="msj-rta macro" style="margin: 8px;">
+                <div class="text text-r" style="background:whitesmoke !important">
+                    <input class="mytext" placeholder="Type a message" />
+                </div>
+
+            </div>
+            <div style="margin: auto;">
+                <button style="margin-right: 10px;width: 50px; height: 40px; border-radius: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-send" viewBox="0 0 16 16">
+                        <path
+                            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+<style lang="css" src="@/assets/css/Chatroom.css">
+</style>
+<script>
+import { defineComponent } from "vue";
+import chatLeftRecord from '@/components/Chatroom/chatLeftRecord.vue'
+import chatRightRecord from '@/components/Chatroom/chatRightRecord.vue'
+export default defineComponent({
+    name: "chatBox",
+    components: {
+        chatLeftRecord,
+        chatRightRecord
+    }
+})
+</script>

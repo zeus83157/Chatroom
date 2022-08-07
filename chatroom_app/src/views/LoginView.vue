@@ -1,15 +1,21 @@
 <template>
-  <appForm v-bind:dataset="dataset" v-bind:successfunc="successfunc" url="api/Auth/login" />
+  <appNav />
+  <section style="height: 95%">
+    <appForm v-bind:dataset="dataset" v-bind:successfunc="successfunc" url="api/Auth/login" />
+  </section>
+  <appFooter />
 </template>
 <script>
 // @ is an alias to /src
 import appForm from '@/components/Form/appForm.vue'
+import appNav from '@/components/appNav.vue'
 import { useCookies } from "vue3-cookies";
 
 export default {
   name: 'LoginView',
   components: {
-    appForm
+    appForm,
+    appNav
   },
   data() {
     return {

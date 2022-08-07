@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
+import ChatroomView from '../views/ChatroomView.vue'
 
 const routes = [
   {
@@ -10,10 +12,15 @@ const routes = [
   {
     path: '/Register',
     name: 'Register',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RegisterView.vue'),
-    // meta: {
-    //   requiresAuth: true
-    // }
+    component: RegisterView
+  },
+  {
+    path: '/Chatroom',
+    name: 'Chatroom',
+    component: ChatroomView,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
