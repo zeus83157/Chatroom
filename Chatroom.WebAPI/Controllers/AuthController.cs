@@ -25,7 +25,10 @@ namespace Chatroom.WebAPI.Controllers
             if (_authService.ValidateUser(loginData))
             {
                 var token = _jwtHelper.GenerateToken(model.UserName.ToString());
-                return Ok(new { token });
+                return Ok(new { 
+                    token = token,
+                    user = model.UserName
+                });
             }
             return BadRequest("Login Fail");
         }
