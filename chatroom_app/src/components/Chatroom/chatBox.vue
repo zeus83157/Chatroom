@@ -7,12 +7,12 @@
         <div>
             <div class="msj-rta macro" style="margin: 8px;">
                 <div class="text text-r" style="background:whitesmoke !important">
-                    <input class="mytext" placeholder="Type a message" />
+                    <input class="mytext" placeholder="Type a message" v-model="Newmsg" />
                 </div>
 
             </div>
             <div style="margin: auto;">
-                <button style="margin-right: 10px;width: 50px; height: 40px; border-radius: 10px;">
+                <button @click="send" style="margin-right: 10px;width: 50px; height: 40px; border-radius: 10px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-send" viewBox="0 0 16 16">
                         <path
@@ -29,11 +29,52 @@
 import { defineComponent } from "vue";
 import chatLeftRecord from '@/components/Chatroom/chatLeftRecord.vue'
 import chatRightRecord from '@/components/Chatroom/chatRightRecord.vue'
+import * as signalr from '@microsoft/signalr'
 export default defineComponent({
     name: "chatBox",
     components: {
         chatLeftRecord,
         chatRightRecord
+    },
+    created() {
+        const token = this.$cookies.get("token");
+        this.Connection = new signalr.HubConnectionBuilder()
+            .withUrl(process.env.VUE_APP_WEBAPI_ENDPOINT + "ChatHub", {
+                accessTokenFactory: () => token,
+                skipNegotiation: true,
+                transport: 1
+            })
+            .build();
+    },
+    async mounted() {
+        async function start(connection) {
+            try {
+                await connection.start()
+            } catch (err) {
+                console.log('連線失敗')
+            }
+        }
+        await start(this.Connection)
+        const currentUser = this.$cookies.get("user");
+        this.Connection.on("ReceiveMessage", function (user, datetime, message) {
+            if (user == currentUser)
+                console.log("I say: " + message + "(" + datetime + ")");
+            else
+                console.log(user + " say: " + message + "(" + datetime + ")");
+        })
+    },
+    data() {
+        return {
+            Connection: null,
+            CurrentRecord: [],
+            OtherRecord: [],
+            Newmsg: ""
+        }
+    },
+    methods: {
+        send() {
+            this.Connection.invoke('SendMessage', this.Newmsg)
+        }
     }
 })
 </script>

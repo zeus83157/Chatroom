@@ -10,6 +10,7 @@
 import appForm from '@/components/Form/appForm.vue'
 import appNav from '@/components/appNav.vue'
 import { useCookies } from "vue3-cookies";
+import router from '@/router';
 
 export default {
   name: 'LoginView',
@@ -44,6 +45,8 @@ export default {
     successfunc: (response) => {
       const { cookies } = useCookies();
       cookies.set("token", response.data.token, 60 * 10);
+      cookies.set("user", response.data.user, 60 * 10);
+      router.push("Chatroom")
     }
   }
 }
