@@ -1,9 +1,10 @@
 <template>
-  <appForm v-bind:dataset="dataset" />
+  <appForm v-bind:dataset="dataset" v-bind:successfunc="successfunc" url="api/Account/register" />
 </template>
 <script>
 // @ is an alias to /src
 import appForm from '@/components/appForm.vue'
+import router from '../router'
 
 export default {
   name: 'RegisterView',
@@ -53,6 +54,13 @@ export default {
         }
         ]
       }
+    }
+  },
+  methods: {
+    successfunc: (response) => {
+      if (response)
+        alert("Register Success!");
+        router.push({ path: "/" });
     }
   }
 }
