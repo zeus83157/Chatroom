@@ -29,7 +29,7 @@ namespace Chatroom.WebAPI.Models.ViewModels
         public DateTimeOffset UpdatedDatetime { get; set; }
 
         [Required]
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
 
         [JsonIgnore]
         public int StarSignID { get; set; }

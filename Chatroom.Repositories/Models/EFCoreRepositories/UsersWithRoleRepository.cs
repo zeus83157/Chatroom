@@ -37,12 +37,15 @@ namespace Chatroom.Repositories.Models.EFCoreRepositories
                 {
                     ID = usersWithRoleEntity.UserID,
                     UserID = usersWithRoleEntity.UserID,
-                    RoleID = usersWithRoleEntity.RoleID
+                    RoleID = usersWithRoleEntity.RoleID,
+                    CreateDatetime = usersWithRoleEntity.CreateDatetime,
+                    UpdatedDatetime = usersWithRoleEntity.UpdatedDatetime
                 });
             else
             {
                 usersWithRole.UserID = usersWithRoleEntity.UserID;
                 usersWithRole.RoleID = usersWithRoleEntity.RoleID;
+                usersWithRole.UpdatedDatetime = usersWithRoleEntity.UpdatedDatetime;
 
                 _SampleDBContext.Entry(usersWithRole).State = EntityState.Modified;
             }
