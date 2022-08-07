@@ -36,8 +36,8 @@ nav a.router-link-exact-active {
 </style>
 <script>
 import { defineComponent } from "vue";
-import formTextbox from "@/components/formTextbox.vue";
-import formRadio from "@/components/formRadio.vue";
+import formTextbox from "@/components/Form/formTextbox.vue";
+import formRadio from "@/components/Form/formRadio.vue";
 const axios = require('axios').default;
 export default defineComponent({
     name: 'appForm',

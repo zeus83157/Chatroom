@@ -3,7 +3,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import appForm from '@/components/appForm.vue'
+import appForm from '@/components/Form/appForm.vue'
 import { useCookies } from "vue3-cookies";
 
 export default {
