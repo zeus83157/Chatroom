@@ -1,12 +1,14 @@
 <template>
     <div class="col-sm-5 col-sm-offset-6 frame" style="margin:auto;">
         <ul>
-            <chatLeftRecord />
-            <chatRightRecord />
+            <chatLeftRecord v-for="(item, index) in this.OtherRecord" :key="index" v-bind:user="item.username"
+                v-bind:datetime="item.datetime" v-bind:message="item.message" v-bind:image="item.image" />
+            <chatRightRecord v-for="(item, index) in this.CurrentRecord" :key="index" v-bind:user="item.username"
+                v-bind:datetime="item.datetime" v-bind:message="item.message" v-bind:image="item.image" />
         </ul>
         <div>
             <div class="msj-rta macro" style="margin: 8px;">
-                <div class="text text-r" style="background:whitesmoke !important">
+                <div class="text text-r" style="background:whitesmoke !important; width: 100%;">
                     <input class="mytext" placeholder="Type a message" v-model="Newmsg" />
                 </div>
 
@@ -47,6 +49,7 @@ export default defineComponent({
             .build();
     },
     async mounted() {
+        let component = this;
         async function start(connection) {
             try {
                 await connection.start()
@@ -57,10 +60,23 @@ export default defineComponent({
         await start(this.Connection)
         const currentUser = this.$cookies.get("user");
         this.Connection.on("ReceiveMessage", function (user, datetime, message) {
-            if (user == currentUser)
-                console.log("I say: " + message + "(" + datetime + ")");
-            else
-                console.log(user + " say: " + message + "(" + datetime + ")");
+            if (user == currentUser) {
+                component.CurrentRecord.push({
+                    username: user,
+                    datetime: datetime,
+                    message: message,
+                    image: "https://fakeimg.pl/200x200/?text=" + user
+
+                })
+            }
+            else {
+                component.OtherRecord.push({
+                    username: user,
+                    datetime: datetime,
+                    message: message,
+                    image: "https://fakeimg.pl/200x200/?text=" + user
+                })
+            }
         })
     },
     data() {
@@ -73,7 +89,8 @@ export default defineComponent({
     },
     methods: {
         send() {
-            this.Connection.invoke('SendMessage', this.Newmsg)
+            this.Connection.invoke('SendMessage', this.Newmsg);
+            this.Newmsg = "";
         }
     }
 })
