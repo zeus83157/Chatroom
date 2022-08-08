@@ -6,6 +6,7 @@ using Chatroom.Repositories.Models.UnitOfWorks;
 using Chatroom.Utilities.Services;
 using Chatroom.WebAPI.Helpers;
 using Chatroom.WebAPI.Models;
+using Chatroom.WebAPI.Models.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -58,6 +59,23 @@ builder.Services
              // "1234567890123456" 應該從 IConfiguration 取得
              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JwtSettings:Key")))
          };
+
+         options.Events = new JwtBearerEvents
+         {
+             OnMessageReceived = context =>
+             {
+                 // SignalR 會將 Token 以參數名稱 access_token 的方式放在 URL 查詢參數裡
+                 var accessToken = context.Request.Query["access_token"];
+
+                 // 連線網址為 Hubs 相關路徑才檢查
+                 var path = context.HttpContext.Request.Path;
+                 if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/ChatHub"))
+                 {
+                    context.Token = accessToken;
+                 }
+                 return Task.CompletedTask;
+             }
+         };
      });
 builder.Services.AddAuthorization();
 builder.Services.AddScoped(typeof(ClaimsPrincipal));
@@ -70,6 +88,9 @@ builder.Services.AddScoped<IUnitOfWork, EFCoreUnitOfWork>();
 builder.Services.AddScoped(typeof(AuthService));
 builder.Services.AddScoped(typeof(AccountService));
 
+builder.Services.AddSignalR();
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -77,6 +98,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("CorsPolicy");
 }
 
 app.UseHttpsRedirection();
@@ -84,5 +106,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

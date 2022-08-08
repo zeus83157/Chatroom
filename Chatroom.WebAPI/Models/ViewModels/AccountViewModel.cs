@@ -11,7 +11,7 @@ namespace Chatroom.WebAPI.Models.ViewModels
         [Required]
         [MinLength(8)]
         [MaxLength(20)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [EmailAddress]
         [Required]
@@ -29,7 +29,7 @@ namespace Chatroom.WebAPI.Models.ViewModels
         public DateTimeOffset UpdatedDatetime { get; set; }
 
         [Required]
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
 
         [JsonIgnore]
         public int StarSignID { get; set; }

@@ -56,13 +56,13 @@ namespace Chatroom.Repositories.Models.EFCoreRepositories.ORM
                     .WithMany(p => p.UsersWithRole)
                     .HasForeignKey(d => d.RoleID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UsersWithRole_Role");
+                    .HasConstraintName("FK_Role_UsersWithRole");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UsersWithRole)
                     .HasForeignKey(d => d.UserID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UsersWithRole_User");
+                    .HasConstraintName("FK_User_UsersWithRole");
             });
 
             OnModelCreatingPartial(modelBuilder);

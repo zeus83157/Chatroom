@@ -21,9 +21,9 @@ namespace Chatroom.WebAPI.Controllers
             var accountData = new AccountData
             {
                 Email = accountViewModel.Email,
-                Gender = accountViewModel.Gender,
+                Gender = accountViewModel.Gender == "true",
                 Password = accountViewModel.Password,
-                UserName = accountViewModel.UserName,
+                UserName = accountViewModel.Username,
                 StarSignID = accountViewModel.StarSignID,
             };
             if (_accountService.CreateUser(accountData))
